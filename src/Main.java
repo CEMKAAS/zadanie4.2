@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.sun.tools.javac.util.StringUtils.toLowerCase;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -41,19 +43,43 @@ public class Main {
                 }
                 System.out.println("Какую хотите удалить? Введите номер или название");
                 String input1 = scanner.nextLine();
-                //String[] parts = input1.split(" ");
-                System.out.println("Покупка " + producs.get(Integer.parseInt(input1)) + " удалена, список покупок:");
-                producs.remove(input1);
-                System.out.println("Список покупок:");
-                for (int i = 0; i < producs.size(); i++) {
-                    String produc = producs.get(i);
-                    System.out.println((i + 1) + "." + produc);
+                if (producs.remove(input1)) {
+                    System.out.println("Покупка " + input1 + " удалена, список покупок:");
+                    producs.remove(input1);
+                    System.out.println("Список покупок:");
+                    for (int i = 0; i < producs.size(); i++) {
+                        String produc = producs.get(i);
+                        System.out.println((i + 1) + "." + produc);
+                    }
+                    continue;
                 }
-
+                if (!producs.remove(input1)) {
+                    int product = Integer.parseInt(input1);
+                    System.out.println("Покупка " + producs.get(product - 1) + " удалена, список покупок:");
+                    producs.remove(product - 1);
+                    System.out.println("Список покупок:");
+                    for (int i = 0; i < producs.size(); i++) {
+                        String produc = producs.get(i);
+                        System.out.println((i + 1) + "." + produc);
+                    }
+                }
             }
-            continue;
 
+            if (nomer == 4) {
+                System.out.println("Введите текст для поиска");
+                String queryLower = scanner.nextLine();
+                toLowerCase(queryLower);
+                for (int i = 0; i < producs.size(); i++) {
+                    String itemLower = producs.get(i);
+                    toLowerCase(itemLower);
+                    if (itemLower.contains(queryLower)) {
+                        System.out.println("Найдено: ");
+                        String produc = producs.get(i);
+                        System.out.println((i + 1) + "." + produc);
+                    }
+
+                }
+            }
         }
-
     }
 }
