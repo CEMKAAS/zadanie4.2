@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
-
-
+import static com.sun.tools.javac.util.StringUtils.toLowerCase;
 public class Main {
     static ArrayList<String> products = new ArrayList<>();
 
@@ -29,7 +27,7 @@ public class Main {
                 System.out.println("Итого в списке покупок: " + products.size());
             }
             if (number == 2) {
-               listOutput();
+                listOutput();
             }
 
             if (number == 3) {
@@ -62,7 +60,6 @@ public class Main {
                         String product = products.get(i);
                         System.out.println((i + 1) + "." + product);
                     }
-
                 }
             }
         }
