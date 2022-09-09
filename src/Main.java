@@ -1,10 +1,10 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.sun.tools.javac.util.StringUtils.toLowerCase;
-public class Main {
-    static ArrayList<String> products = new ArrayList<>();
 
+public class Main {
     public static void main(String[] args) {
 
         System.out.println("Выберите операцию");
@@ -13,6 +13,7 @@ public class Main {
         System.out.println("3.Операция удалить");
         System.out.println("4.Операция поиск");
         Scanner scanner = new Scanner(System.in);
+        List<String> products = new ArrayList<>();
 
         while (true) {
             System.out.println();
@@ -27,24 +28,23 @@ public class Main {
                 System.out.println("Итого в списке покупок: " + products.size());
             }
             if (number == 2) {
-                listOutput();
+                listOutput(products);
             }
 
             if (number == 3) {
-                listOutput();
+                listOutput(products);
                 System.out.println("Какую хотите удалить? Введите номер или название");
                 String delProduct = scanner.nextLine();
                 if (products.remove(delProduct)) {
                     System.out.println("Покупка " + delProduct + " удалена, список покупок:");
                     products.remove(delProduct);
-                    listOutput();
+                    listOutput(products);
                     continue;
-                }
-                if (!products.remove(delProduct)) {
+                } else {
                     int product = Integer.parseInt(delProduct);
                     System.out.println("Покупка " + products.get(product - 1) + " удалена, список покупок:");
                     products.remove(product - 1);
-                    listOutput();
+                    listOutput(products);
                 }
             }
 
@@ -64,7 +64,8 @@ public class Main {
             }
         }
     }
-    public static void listOutput (){
+
+    public static void listOutput(List<String> products) {
         System.out.println("Список покупок:");
         for (int i = 0; i < products.size(); i++) {
             String product = products.get(i);
